@@ -1036,3 +1036,13 @@ function notes_description_box() {
 	</div>	
 	<?php
 }
+
+// Filter wp_nav_menu() to add additional links and other output
+function new_nav_menu_items($items) {
+    $homelink = '<li class="home-nav"><a href="' . home_url( '/' ) . '">' . get_bloginfo('name') . '</a></li><li class="home-nav-separator"><span>»</span></li>';
+    $items = $homelink . $items;
+		$subscribe_link = '<li class="subscribe"><a href="/#subscribe">subscribe</a> <sup><a href="http://feeds.feedburner.com/RaamDevsWeblog">rss</a></sup></li>';
+		$items = $items . $subscribe_link;
+    return $items;
+}
+add_filter( 'wp_nav_menu_items', 'new_nav_menu_items' );

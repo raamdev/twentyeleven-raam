@@ -36,7 +36,9 @@
 			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'twentyeleven' ) ); ?></div>
 		</nav>
 		<?php endif; // check for comment navigation ?>
-
+		
+		<div id="comments-line"></div>
+		
 		<ol class="commentlist">
 			<?php
 				/* Loop through and list the comments. Tell wp_list_comments()

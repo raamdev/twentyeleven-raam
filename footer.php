@@ -15,21 +15,20 @@
 </div><!-- #page -->
 <div style="clear: both;"></div>
 <div id="footer">
-<div id="header-nav">
-<span style="padding-right: 10px;"><a href="/">Raam Dev</a></span>
-<span style="padding-right: 10px;font-size: 12px;font-family: Georgia, serif" ;="">»</span>
-<span style="padding-right: 20px;"><a href="/thoughts/">thoughts</a></span>
-<span style="padding-right: 20px;"><a href="/archives/">essays</a></span>
-<span style="padding-right: 20px;"><a href="/journal/">journal</a></span>
-<span style="padding-right: 20px;"><a href="/notes/">notes</a></span>
-<span style="padding-right: 20px;"><a href="/contact/">contact</a></span>
-<span style="padding-right: 20px;"><a href="/about/">about</a></span>
-<span style="padding-right: 0px;"><a href="/#subscribe">subscribe</a> <sup><a href="http://feeds.feedburner.com/RaamDevsWeblog">rss</a></sup></span>
-</div>
+	<div id="header-nav" class="<?php if(is_home()) { echo 'header-nav-home'; } ?>">
+
+		<nav id="access" role="navigation">
+			<h3 class="assistive-text"><?php _e( 'Main menu', 'twentyeleven' ); ?></h3>
+			<?php /* Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff. */ ?>
+			<div class="skip-link"><a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to primary content', 'twentyeleven' ); ?>"><?php _e( 'Skip to primary content', 'twentyeleven' ); ?></a></div>
+			<div class="skip-link"><a class="assistive-text" href="#secondary" title="<?php esc_attr_e( 'Skip to secondary content', 'twentyeleven' ); ?>"><?php _e( 'Skip to secondary content', 'twentyeleven' ); ?></a></div>
+			<?php /* Our navigation menu. If one isn't filled out, wp_nav_menu falls back to wp_page_menu. The menu assigned to the primary location is the one used. If one isn't assigned, the menu with the lowest ID is used. */ ?>
+			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+		</nav><!-- #access -->
+	</div>
 <br/>
-<em><a href="">This design</a> was organically grown with <a href="http://wordpress.org/" target="_new">WordPress</a> from <a href="http://theme.wordpress.com/themes/twentyeleven/" target="_new">TwentyEleven</a> with help from <a href="http://alidark.com/" target="_new">Ali Dark</a>.
-	<br>
-Except for previously copyrighted material, everything published here is <a href="">creative commons</a>.</em></div>
+<p><em>This site has <a href="/about/sharerights/">sharerights</a>.</em></p>
+<p><em><a href="https://github.com/raamdev/twentyeleven-raam" target="_new">Site design</a> organically grown with help from <a href="http://alidark.com/" target="_new">Ali Dark</a>.</em></p></div>
 
 <?php wp_footer(); ?>
 

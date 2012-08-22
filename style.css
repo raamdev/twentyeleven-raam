@@ -122,14 +122,15 @@ body {
 #header-nav {
 	margin: 0pt auto; 
 /*	border-bottom: 1px solid rgb(221, 221, 221); */
-	width: 610px; 
+	width: 605px;
 	text-transform: uppercase; 
 	font-size: 11px; 
 	padding: 8px; 
 	padding: center; 
 /*	font-family: Palatino, 'Times New Roman', serif;*/
 	font-family: serif;
-	padding-bottom: 0px; 
+	padding-bottom: 18px; 
+	padding-top: 10px;
 	text-align: center; 
 	line-height: 20px;
 }
@@ -437,10 +438,10 @@ a:hover {
 #access {
 	background: transparent;
 	clear: both;
-	display: block;
+	/*display: block;*/
 	float: left;
-	margin: 1em auto 3em;
-	width: 100%;
+/*	margin: 1em auto 3em;*/
+	/*width: 100%;*/
 	
 }
 #access ul {
@@ -458,7 +459,7 @@ a:hover {
 
 #access a {
 	font-weight: normal;
-	display: block;
+	/*display: block;*/
 	line-height: 1.5em;
 	padding: 0 0.8em;
 	text-decoration: none;
@@ -1771,7 +1772,7 @@ section.ephemera .entry-title a span {
 /* =Comments
 ----------------------------------------------- */
 
-#comments {
+#comments-line {
     padding-top: 25px;
     border-top: 1px solid #eee;
     margin-top: 60px;
@@ -2285,7 +2286,9 @@ p.comment-form-comment {
 	#header-nav {
 		width: 410px; 
 		padding-top: 0px;
+		padding-bottom: 40px;
 	}
+	#menu-main-nav li { margin-bottom: 5px !important; }
 
 	/* Adjust size of Single Post Subscription Box */
 	.subscribe-essays {
@@ -2337,7 +2340,9 @@ p.comment-form-comment {
 	#header-nav {
 		width: 310px; 
 		padding-top: 0px;
+		padding-bottom: 70px; 
 	}
+	#menu-main-nav li { margin-bottom: 5px !important; }
 
 	/* Adjust size of Single Post Subscription Box */
 	.subscribe-essays-box {
@@ -2584,6 +2589,7 @@ p.comment-form-comment {
 
 #footer { text-align: center; margin: 0 auto; padding-top: 1em; margin-bottom: 1em; border-top:  1px #eee solid; font-size: 12px; margin-top: 3em;}
 #footer a {font-weight: normal !important; }
+#footer p { margin-bottom: .5em; }
 
 a {color: #326281 !important;}
 a:hover {color: #333 !important; text-decoration: none !important;}
@@ -2935,3 +2941,10 @@ font-weight: normal;
 .entry-content ol li { margin-top: 15px; }
 
 .related_post { font-size: 90% !important; }
+
+.home-nav-separator {font-size: 12px;font-family: serif;}
+
+#menu-main-nav { margin: 0px !important; width: 100% !important; }
+#menu-main-nav li { margin-top: 0px; margin-right: 5px !important; }
+.subscribe a { padding-right: 0px !important; }
+.subscribe sup a { padding-left: 0px !important; }
