@@ -523,7 +523,7 @@ function twentyeleven_comment( $comment, $args, $depth ) {
 								esc_url( get_comment_link( $comment->comment_ID ) ),
 								get_comment_time( 'c' ),
 								/* translators: 1: date */
-								sprintf( __( '%1$s', 'twentyeleven' ), get_comment_date() )
+								sprintf( __( '%1$s', 'twentyeleven' ), get_comment_date('Y-m-d') )
 							)
 						);
 					?>
@@ -597,10 +597,32 @@ function essays_post_header_metadata() {
 <!-- START POST HEADER METADATA -->
 
 <div style="text-align: center;">
-<div class="entry-meta" style="font-size: 13px; line-height: 1.6em;">
-<p><em>Published <?php the_time('F jS, Y') ?> by <?php the_author(); ?>
-<br>
-<?php echo get_post_meta( get_the_ID(), 'ncl_current_location', true ); ?></em></p>
+<div class="entry-meta">
+
+<?php $audio = get_post_meta( get_the_ID(), 'audio_reading_url', true ); ?>
+<?php if (trim($audio) != "") { ?>
+
+<?php if ('journal' == get_post_type()) { ?>
+	<?php $release_after=365 * 86400; // days * seconds per day
+	$post_age = date('U') - get_post_time('U');
+	if ($post_age > $release_after || current_user_can("access_s2member_level1")) { ?>	
+
+	<div id="audio-player"><a class="wpaudio" href="<?php echo $audio; ?>">Listen to Raam Dev reading this entry</a></div>
+
+	<?php } else { // else they don't have permission to view this ?>
+
+	<div id="audio-player"><img class="wpaudio-play" src="http://raamdev.com/wordpress/wp-content/plugins/wpaudio-mp3-player/wpaudio-play.png" style="margin: 0px 5px 0px 0px; width: 14px; height: 13px; background-color: rgb(204, 204, 204); vertical-align: baseline; border: 0px; padding: 0px; background-position: initial initial; background-repeat: initial initial; "><a href="http://raamdev.com/wordpress/wp-login.php" style="border-bottom: 1px solid #eee !important;">Login</a> to listen to Raam Dev read this entry</div>
+
+	<?php } // ends permissions check ?>
+<?php } else { // else it's not a journal entry, so just give access ?>
+	<div id="audio-player"><a class="wpaudio" href="<?php echo $audio; ?>">Listen to Raam Dev reading this entry</a></div>
+<?php } // ends check if journal ?>	
+<?php } // ends check if audio file URL exists ?>
+
+
+<?php $location = get_post_meta( get_the_ID(), 'ncl_current_location', true ); ?>
+<em>Published <?php the_time('F jS, Y'); ?><?php if(trim($location) != "") { echo ", <span class=\"mapThis\" place=\"$location\" zoom=\"2\">$location</span>"; } ?></em>
+
 </div>
 </div>
 
@@ -618,7 +640,7 @@ function essays_post_metadata() {
 	<span class="entry-meta">
 <br>
 <em>If you enjoyed this, please share it with others:<br>
-<a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=RT%20@RaamDev%20<?php the_title(); ?>" target="_new">Twitter</a> | <a href="https://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>" target="_new">Facebook</a> | <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=<?php the_permalink(); ?>" target="_new">Google Plus</a> | <?php if(function_exists('wp_email')) { email_link(); } ?> <!-- <a href="#" target="_new">Send via Email</a>--></em>
+Share on <a href="https://twitter.com/share?url=<?php the_permalink(); ?>&text=RT%20@RaamDev%20<?php the_title(); ?>" target="_new">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>" target="_new">Facebook</a>, <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=<?php the_permalink(); ?>" target="_new">Google+</a><?php if(function_exists('wp_email') && 'post' == get_post_type()) { echo ', or '; email_link(); } ?> <!-- <a href="#" target="_new">Send via Email</a>--></em>
 
 <!-- <?php if (get_post_type() == 'post') { ?><br />Filed in <?php the_category(', '); } ?><?php if (has_tag()) { ?>, and tagged <?php the_tags( '', ', ', ''); ?> <?php } ?> -->
 
@@ -637,15 +659,27 @@ function essays_subscribe_box() {
 <div class="subscribe-essays">
 
 <form method="post" action="http://raamdev.us1.list-manage.com/subscribe/post?u=5daf0f6609de2506882857a28&amp;id=dc1b1538af" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-		
-<div class="subscribe-essays-box">
-<div class="subscribe-essays-title"><em>Subscribe to receive new thoughts and essays as they're published:</em></div>
+<div class="subscribe-essays-box" style="font-family: sans-serif; color: rgba(0, 0, 0, 0.3); font-weight: 300;">
+<div class="subscribe-essays-title">Subscribe to receive new thoughts and essays as they're published:</div>
+<?php if(in_category('20') || is_singular('journal') || is_singular('thoughts')) { $reflections = "checked"; } ?>
+<?php if(in_category('5') || is_singular('journal') || is_singular('thoughts')) { $technology = "checked"; } ?>
+<?php if(in_category('859') || is_singular('journal') || is_singular('thoughts')) { $writing = "checked"; } ?>
 
 	<div class="subscribe-essays-name">Name: <input type="text" name="FNAME" class="text" value="" tabindex="500" onclick="" onfocus="" onblur=""></div>
 
 	<div class="subscribe-essays-email">Email: <input type="text" class="text" name="EMAIL" value="" tabindex="501" onclick="" onfocus=""></div>
 	<div style="display:none;"> <input type="hidden" name="group[1129]" value="1" id="mce-group[1129]"> </div>
+	<div style="display:none;"> <input type="hidden" name="group[1873]" value="32" id="group[1873]"> </div>
 	<div style="display:none;"> <input type="hidden" name="MERGE3" value="<?php echo 'http://' . $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; ?>" id="MERGE3"> </div>
+
+<div style="clear:both"></div>
+<div class="subscribe-single-essay-topics">
+Topics:
+<input type="checkbox" id="group_64" name="group[1989][64]" value="1" <?php echo $reflections; ?> style="font-size: 12px;">&nbsp;<label for="group_64" style="font-style: italic;">Personal Reflections</label>
+<input type="checkbox" id="group_128" name="group[1989][128]" value="1" <?php echo $technology; ?> style="font-size: 12px;">&nbsp;<label for="group_128" style="font-style: italic;">Technology</label>
+<input type="checkbox" id="group_256" name="group[1989][256]" value="1" <?php echo $writing; ?> style="font-size: 12px;">&nbsp;<label for="group_256" style="font-style: italic;">Writing</label><br>
+</div>
+
 	<div class="subscribe-essays-submit"><input type="submit" name="subscribe" value="Subscribe" tabindex="503"></div>
 
 <div style="clear: both;"></div>
@@ -713,9 +747,7 @@ function cleanr_theme_pings($comment, $args, $depth) {
  */
 add_action( 'init', 'create_post_type_thoughts' );
 add_action( 'init', 'create_post_type_journal' );
-add_action( 'init', 'create_post_type_journalk09r4tyf58u35' );
-add_action( 'init', 'create_post_type_notes' );
-add_action( 'init', 'create_post_type_notesk09r4ty' );
+add_action( 'init', 'create_post_type_journalkj93yqkdppt' );
 
 function create_post_type_thoughts() {	
 	register_post_type('thoughts', array(	'label' => 'Thoughts','description' => '','public' => true,'show_ui' => true,'show_in_menu' => true,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'supports' => array('title','editor','trackbacks','comments','revisions','custom-fields',),'taxonomies' => array('post_tag',),'labels' => array (
@@ -756,66 +788,27 @@ function create_post_type_journal() {
 }
 
 /* Used to hack the post_type RSS feed and prevent public from viewing the Journal feed */
-function create_post_type_journalk09r4tyf58u35() {
-	register_post_type('journalk09r4tyf58u35', array(	'label' => 'Journal_k09r4tyf58u35','description' => '','public' => true,'show_ui' => true,'show_in_menu' => false,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'supports' => array('title','editor','trackbacks','comments','revisions','custom-fields',),'taxonomies' => array('post_tag',),'labels' => array (
-	  'name' => 'Journalk09r4tyf58u35',
-	  'singular_name' => 'Journal Entry_k09r4tyf58u35',
-	  'menu_name' => 'Journal_k09r4tyf58u35',
-	  'add_new' => 'Add Journal_k09r4tyf58u35',
-	  'add_new_item' => 'Add New Journal_k09r4tyf58u35',
+function create_post_type_journalkj93yqkdppt() {
+	register_post_type('journalkj93yqkdppt', array(	'label' => 'Journal_kj93yqkdppt','description' => '','public' => true,'show_ui' => true,'show_in_menu' => false,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'supports' => array('title','editor','trackbacks','comments','revisions','custom-fields',),'taxonomies' => array('post_tag',),'labels' => array (
+	  'name' => 'Journalkj93yqkdppt',
+	  'singular_name' => 'Journal Entry_kj93yqkdppt',
+	  'menu_name' => 'Journal_kj93yqkdppt',
+	  'add_new' => 'Add Journal_kj93yqkdppt',
+	  'add_new_item' => 'Add New Journal_kj93yqkdppt',
 	  'edit' => 'Edit',
-	  'edit_item' => 'Edit Journal_k09r4tyf58u35',
-	  'new_item' => 'New Journal_k09r4tyf58u35',
-	  'view' => 'View Journal_k09r4tyf58u35',
-	  'view_item' => 'View Journal_k09r4tyf58u35',
-	  'search_items' => 'Search Journal_k09r4tyf58u35',
-	  'not_found' => 'No Journal Entries Found_k09r4tyf58u35',
-	  'not_found_in_trash' => 'No Journal_k09r4tyf58u35 Entries Found in Trash',
-	  'parent' => 'Parent Journal_k09r4tyf58u35 Entry',
-	),) );
-}
-
-function create_post_type_notes() {
-	register_post_type('notes', array(	'label' => 'Notes','description' => '','public' => true,'show_ui' => true,'show_in_menu' => true,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'supports' => array('title','editor','trackbacks','comments','revisions','custom-fields',),'taxonomies' => array('post_tag',),'labels' => array (
-	  'name' => 'Notes',
-	  'singular_name' => 'Notes',
-	  'menu_name' => 'Notes',
-	  'add_new' => 'Add Note',
-	  'add_new_item' => 'Add Note',
-	  'edit' => 'Edit',
-	  'edit_item' => 'Edit Note',
-	  'new_item' => 'New Note',
-	  'view' => 'View Note',
-	  'view_item' => 'View Note',
-	  'search_items' => 'Search Notes',
-	  'not_found' => 'No Notes Found',
-	  'not_found_in_trash' => 'No Notes Found in Trash',
-	  'parent' => 'Parent Note',
-	),) );
-}
-
-/* Hack to hide Notes RSS feed */
-function create_post_type_notesk09r4ty() {
-	register_post_type('notesk09r4ty', array(	'label' => 'notesk09r4ty','description' => '','public' => true,'show_ui' => true,'show_in_menu' => false,'capability_type' => 'post','hierarchical' => false,'rewrite' => array('slug' => ''),'query_var' => true,'has_archive' => true,'supports' => array('title','editor','trackbacks','comments','revisions','custom-fields',),'taxonomies' => array('post_tag',),'labels' => array (
-	  'name' => 'notesk09r4ty',
-	  'singular_name' => 'notesk09r4ty',
-	  'menu_name' => 'notesk09r4ty',
-	  'add_new' => 'Add notesk09r4ty',
-	  'add_new_item' => 'Add New notesk09r4ty',
-	  'edit' => 'Edit',
-	  'edit_item' => 'Edit notesk09r4ty',
-	  'new_item' => 'New notesk09r4ty',
-	  'view' => 'View notesk09r4ty',
-	  'view_item' => 'View notesk09r4ty',
-	  'search_items' => 'Search notesk09r4ty',
-	  'not_found' => 'No notesk09r4ty Found',
-	  'not_found_in_trash' => 'No notesk09r4ty Found in Trash',
-	  'parent' => 'Parent notesk09r4ty',
+	  'edit_item' => 'Edit Journal_kj93yqkdppt',
+	  'new_item' => 'New Journal_kj93yqkdppt',
+	  'view' => 'View Journal_kj93yqkdppt',
+	  'view_item' => 'View Journal_kj93yqkdppt',
+	  'search_items' => 'Search Journal_kj93yqkdppt',
+	  'not_found' => 'No Journal Entries Found_kj93yqkdppt',
+	  'not_found_in_trash' => 'No Journal_kj93yqkdppt Entries Found in Trash',
+	  'parent' => 'Parent Journal_kj93yqkdppt Entry',
 	),) );
 }
 
 /*
- * Show Essays in the default RSS feed; hide Notes and Journal from RSS feeds
+ * Show Essays in the default RSS feed; hide the Journal from RSS feeds
  */
 function myfeed_request($qv) {
 	if (isset($qv['feed']) && !isset($qv['post_type'])) {
@@ -824,14 +817,8 @@ function myfeed_request($qv) {
 	elseif (isset($qv['feed']) && isset($qv['post_type']) && $qv['post_type'] == "journal") {
 		$qv['post_type'] = array('post');
 	}
-	elseif (isset($qv['feed']) && isset($qv['post_type']) && $qv['post_type'] == "journalk09r4tyf58u35") {
+	elseif (isset($qv['feed']) && isset($qv['post_type']) && $qv['post_type'] == "journalkj93yqkdppt") {
 			$qv['post_type'] = "journal";
-	}
-	elseif (isset($qv['feed']) && isset($qv['post_type']) && $qv['post_type'] == "notes") {
-		$qv['post_type'] = array('post');
-	}
-	elseif (isset($qv['feed']) && isset($qv['post_type']) && $qv['post_type'] == "notesk09r4ty") {
-			$qv['post_type'] = "notes";
 	}
 		
 	return $qv;
@@ -909,7 +896,7 @@ function post_footer_metadata($post, $a_post_type = "", $a_post_type_label = "",
 	<!-- START POST FOOTER METADATA -->
 	<div class="post-footer-meta">
 	<span class="postmetadata">
-	<?php /*echo time_since(abs(strtotime($post->post_date_gmt . " GMT")), time()); ?> ago |*/?> <?php commentCount('comments'); ?> <?php if($post_footer_metadata_more_label) { ?>| <a href="<?php echo get_post_type_archive_link( $a_post_type ); ?>" title="View more <?php echo $a_post_type_label; ?>">Read more <?php echo $a_post_type_label; ?>...</a><?php }?></span>
+	<?php /*echo time_since(abs(strtotime($post->post_date_gmt . " GMT")), time()); ?> ago |*/?> <?php commentCount('comments'); ?> <?php if($post_footer_metadata_more_label) { ?>| <a href="<?php echo get_post_type_archive_link( $a_post_type ); ?>" title="Read more <?php echo $a_post_type_label; ?>">More <?php echo $a_post_type_label; ?> →</a><?php }?></span>
 	</div>	
 	<!-- END POST FOOTER METADATA -->	
 	<?php
@@ -922,7 +909,7 @@ function commentCount($type = 'comments'){
 		$typeSql = 'comment_type = ""';
 		$oneText = '1 comment'; 
 		$moreText = '% comments';
-		$noneText = 'Comment';
+		$noneText = 'Comments';
 
 	elseif($type == 'pings'):
 
@@ -1026,23 +1013,31 @@ function journal_subscribe_boxes() {
 	<?php
 }
 
-function notes_description_box() {
-	?>
-	<div id="notes-description" style="<?php if(is_user_logged_in()) { ?> display: none; <?php } ?>">
-
-				<p>This is my collection of notes on interesting things that cause me to pause and reflect. Access requires a subscription to <a href="http://raamdev.com/journal/">the Journal</a>.</p>
-				
-							<div style="clear: both;"></div>
-	</div>	
-	<?php
-}
-
 // Filter wp_nav_menu() to add additional links and other output
 function new_nav_menu_items($items) {
     $homelink = '<li class="home-nav"><a href="' . home_url( '/' ) . '">' . get_bloginfo('name') . '</a></li><li class="home-nav-separator"><span>»</span></li>';
     $items = $homelink . $items;
-		$subscribe_link = '<li class="subscribe"><a href="/#subscribe">subscribe</a> <sup><a href="http://feeds.feedburner.com/RaamDevsWeblog">rss</a></sup></li>';
+		//$subscribe_link = '<li class="subscribe"><a href="/#subscribe">subscribe</a> <sup><a href="http://feeds.feedburner.com/RaamDevsWeblog">rss</a></sup></li>';
+	if (is_user_logged_in()) {
+		$loginlink = '<li class="home-nav-separator"><span>»</span></li> <li class="home-nav"><strong>Welcome</strong>, <a style="padding-right: 4px !important;" href="/account/">' . S2MEMBER_CURRENT_USER_FIRST_NAME . '</a>:)</li>';
+		$items = $items . $loginlink;
+	}
+	else {
+		$subscribe_link = '<li class="subscribe"><a href="/#subscribe">subscribe</a></li>';
 		$items = $items . $subscribe_link;
+		$loginlink = '<li class="home-nav-separator"><span>»</span></li> <li class="home-nav"><a href="' . wp_login_url() . '">Login</a></li>';
+		$items = $items . $loginlink;
+	}
     return $items;
 }
 add_filter( 'wp_nav_menu_items', 'new_nav_menu_items' );
+
+/******** CUSTOM MIME UPLOAD TYPES **************/
+
+function addUploadMimes($mimes) {
+    $mimes = array_merge($mimes, array(
+        'epub|mobi' => 'application/octet-stream'
+    ));
+    return $mimes;
+}
+add_filter('upload_mimes', 'addUploadMimes');
