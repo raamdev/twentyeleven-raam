@@ -26,9 +26,10 @@
 			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 		</nav><!-- #access -->
 	</div>
+<div style="clear: both;"></div>
 <br/>
-<p><em>This site has <a href="/about/sharerights/">sharerights</a>.</em></p>
-<p><em><a href="https://github.com/raamdev/twentyeleven-raam" target="_new">Site design</a> organically grown with help from <a href="http://alidark.com/" target="_new">Ali Dark</a>.</em></p></div>
+<p>This site has <a href="/about/sharerights/">sharerights</a>.</p>
+<p><a href="https://github.com/raamdev/twentyeleven-raam" target="_new">Site design</a> organically grown with help from <a href="http://alidark.com/" target="_new">Ali Dark</a>.</p></div>
 
 <?php wp_footer(); ?>
 
