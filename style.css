@@ -10,6 +10,8 @@ License URI: license.txt
 Tags: dark, light, white, black, gray, one-column, two-columns, left-sidebar, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 */
 
+/*@font-face { font-family: Habibi; src: url('fonts/Habibi/Habibi-Regular.ttf'); }*/
+
 /* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 -------------------------------------------------------------- */
 .home .homelink {display:none;}
@@ -79,10 +81,10 @@ body {
 }
 #page {
 	margin: 7.6% auto;
-	width: 30em;
+	width: 34em;
 	margin-top: 2em;
 }
-#footer { width: 50em; }
+#footer { width: 57em; }
 
 #branding hgroup {
 	margin: 0 ;
@@ -122,14 +124,14 @@ body {
 #header-nav {
 	margin: 0pt auto; 
 /*	border-bottom: 1px solid rgb(221, 221, 221); */
-	width: 605px;
+	width: 715px;
 	text-transform: uppercase; 
 	font-size: 11px; 
 	padding: 8px; 
 	padding: center; 
 /*	font-family: Palatino, 'Times New Roman', serif;*/
 	font-family: serif;
-	padding-bottom: 18px; 
+/*	padding-bottom: 18px;*/ 
 	padding-top: 10px;
 	text-align: center; 
 	line-height: 20px;
@@ -216,8 +218,8 @@ body {
 ----------------------------------------------- */
 
 body, input, textarea {
-	color: rgba(0, 0, 0, 0.9);
-	font: 1.2em Habibi, Georgia, serif;
+	color: #111; /* rgba(0, 0, 0, 0.9); */
+	font: 1.1em serif; /* Habibi, Palatino, Georgia, serif; */
 }
 body {
 	background: #fff;
@@ -239,7 +241,7 @@ hr {
 
 /* Text elements */
 p {
-	margin-bottom: 1.625em;
+	margin-bottom: 1.1em;
 }
 ul, ol {
 	margin: 0 0 1.825em 3.5em;
@@ -378,7 +380,7 @@ a:hover {
 	text-decoration: underline;
 	color: #000;
 }
-.entry-content a { border-bottom: 1px solid #EEE; }
+.entry-content a { border-bottom: 1px solid #DBDBDB; }
 
 /* Assistive text */
 .assistive-text {
@@ -439,7 +441,7 @@ a:hover {
 	background: transparent;
 	clear: both;
 	/*display: block;*/
-	float: left;
+/*	float: left;*/
 /*	margin: 1em auto 3em;*/
 	/*width: 100%;*/
 	
@@ -449,10 +451,12 @@ a:hover {
 	list-style: none;
 	margin: 0 0 0 -0.8125em;
 	padding-left: 0;
+	text-align: center;
 }
 #access li {
-	float: left;
+/*	float: left;*/
 	position: relative;
+	display: inline;
 }
 
 .accessright {clear: both;}
@@ -627,12 +631,13 @@ a:hover {
 .entry-title, .entry-content h1 {
 	color: rgba(0, 0, 0, 0.9);
 	font-weight: 300;
-	font-size: 30px;
+	font-size: 35px;
 	padding-bottom: .3em;
 	padding-top: 0;
 	clear: none;
 	letter-spacing: -0.05em;;
 	text-align: center;
+	font-family: sans-serif;
 }
 .entry-title,
 .entry-title a {
@@ -659,8 +664,8 @@ a:hover {
 .entry-meta {
 	color: rgba(0,0,0,0.3);
 	line-height: 18px;
-	font-size: 14px;
-	text-align: center;
+	font-size: 16px;
+	text-align: left;
 }
 .entry-meta a {
 }
@@ -669,9 +674,13 @@ a:hover {
 }
 .entry-content,
 .entry-summary {
-	padding: 0.5em 0 0;
-	font-size: 0.9em; 
+	padding: 1.5em 0 0;
+	/*font-size: 0.9em;*/ 
+	line-height: 1.3em;
 	text-align: left;
+/*	-webkit-hyphens: auto;*/
+/*	-moz-hyphens: auto;*/
+/*	hyphens: auto;*/
 }
 
 .comment-content h1,
@@ -767,11 +776,10 @@ dl.gallery-item {
 	color: #686158;
 	float: right;
 	font-size: 12px;
-	line-height: 1.5em;
+	line-height: 1.3em;
 	font-weight: 300;
 	text-decoration: none;
 	padding: 0 8px;
-display:none;
 }
 .entry-meta .edit-link a:hover,
 .commentlist .edit-link a:hover {
@@ -1191,7 +1199,7 @@ blockquote.pull {
 ----------------------------------------------- */
 
 .error404 #main #searchform {
-	background: #326281;
+	background: #eee;
 	border: 1px solid #ddd;
 	border-width: 1px 0;
 	margin: 0 -8.9% 1.625em;
@@ -1797,7 +1805,7 @@ section.ephemera .entry-title a span {
 .commentlist {
 	list-style: none;
 	margin: 0 auto;
-	font-size: 14px;
+	font-size: 16px;
 }
 .content .commentlist,
 .page-template-sidebar-page-php .commentlist {
@@ -1811,7 +1819,7 @@ section.ephemera .entry-title a span {
 	margin: 0 0 1.625em;
 	padding: 1.625em;
 	position: relative;
-	line-height: 1.4em;
+	line-height: 1.45em;
 }
 .commentlist .pingback {
 	margin: 0 0 1em;
@@ -1832,7 +1840,7 @@ section.ephemera .entry-title a span {
 	position: relative;
 }
 .commentlist .children li.comment .fn {
-	display: block;
+	/*display: block; changed by Raam on 2012-10-03*/
 }
 .comment-meta .fn {
 	font-style: normal;
@@ -1885,7 +1893,7 @@ section.ephemera .entry-title a span {
 	box-shadow: none;
 	left: 1.7em;
 	padding: 0;
-	top: 1.7em;
+	top: 1.3em; /* Changed from 1.7em by Raam on 2012-10-03 */
 }
 a.comment-reply-link {
 	-moz-border-radius: 3px;
@@ -1927,7 +1935,7 @@ a.comment-reply-link > span {
 
 /* Post Author threaded comments */
 .commentlist .children > li.bypostauthor {
-	background: #F6F6F6; /*#ddd;*/
+	/* background: #F6F6F6; */ /*#ddd;*/ /* Commented out by Raam on 2012-10-03 */
 	border-color: #F6F6F6; /*#d3d3d3;*/
 }
 
@@ -1953,6 +1961,7 @@ a.comment-reply-link > span {
 	padding: 1.625em;
 	position: relative;
 	width: 80.9%;
+	font-size: 70%;
 }
 #respond input[type="text"],
 #respond textarea {
@@ -2286,7 +2295,7 @@ p.comment-form-comment {
 	#header-nav {
 		width: 410px; 
 		padding-top: 0px;
-		padding-bottom: 40px;
+		padding-bottom: 20px;
 	}
 	#menu-main-nav li { margin-bottom: 5px !important; }
 
@@ -2307,7 +2316,7 @@ p.comment-form-comment {
 @media (max-width: 500px) {
 
 	#page {width: 20em; }
-	#footer { width: 30em; }
+	#footer { width: 25em; }
 
 	body {padding: 1em;
 		font-size: 1em;
@@ -2340,7 +2349,7 @@ p.comment-form-comment {
 	#header-nav {
 		width: 310px; 
 		padding-top: 0px;
-		padding-bottom: 70px; 
+		padding-bottom: 40px; 
 	}
 	#menu-main-nav li { margin-bottom: 5px !important; }
 
@@ -2348,6 +2357,7 @@ p.comment-form-comment {
 	.subscribe-essays-box {
 		width: 275px;
 	}
+	.subscribe-essays { width: 320px; }
 	/* Simplify comments section to make readable on small screens */
 	.commentlist > li.comment, .commentlist .pingback {
 		margin-left: 0px !important;
@@ -2459,9 +2469,6 @@ p.comment-form-comment {
 	}
 	.singular .entry-header .entry-meta {
 		position: static;
-	}
-	.entry-meta .edit-link a {
-		display: none;
 	}
 	#content nav {
 		display: none;
@@ -2587,9 +2594,10 @@ p.comment-form-comment {
 	margin-right: 7.6%;
 }
 
-#footer { text-align: center; margin: 0 auto; padding-top: 1em; margin-bottom: 1em; border-top:  1px #eee solid; font-size: 12px; margin-top: 3em;}
-#footer a {font-weight: normal !important; }
-#footer p { margin-bottom: .5em; }
+#footer { text-align: center; margin: 0 auto; padding-top: 1em; margin-bottom: 1em; border-top:  1px #eee solid; font-size: 13px; margin-top: 3em;}
+#footer p { margin-bottom: .5em; font-family: sans-serif; font-weight: 300; }
+#footer ul { width: 100% !important; }
+#footer #access { width: 100% !important; }
 
 a {color: #326281 !important;}
 a:hover {color: #333 !important; text-decoration: none !important;}
@@ -2600,7 +2608,7 @@ a:hover {color: #333 !important; text-decoration: none !important;}
 
 .entry-content td, .comment-content td, .entry-content table, .comment-content table {border: none;}
 
-.page form td {text-align: center;}
+/*.page form td {text-align: center;}*/
 
 /*********************** STYLES FOR ESSAYS SUBSCRIBE BOX ********************/
 
@@ -2620,39 +2628,39 @@ a:hover {color: #333 !important; text-decoration: none !important;}
     padding-right: 20px;
 }
 .subscribe-essays-title {
-    text-align: center;
     margin-bottom: 5px;
-    font-weight: normal;
-    color: #C1C1C1;
 }
 .subscribe-essays-name {
 	float: left;
-	font-size: 12px;
-	color: #C1C1C1;
+	font-family: sans-serif;
+	font-weight: 300;
 }
 .subscribe-essays-name input {
 	margin: 9px; 
 	width: 100px; 
 	margin-left: 0px;
-	font-size: 12px;
-	background: white;
+	font-size: 14px;
+	font-family: sans-serif;
+	font-weight: 300;
 }
 
 .subscribe-essays-email {
 	float: left;
-	font-size: 12px;
-	color: #C1C1C1;
+	font-family: sans-serif;
+	font-weight: 300;
 }
 .subscribe-essays-email input {
 	margin: 9px; 
 	width: 180px; 
 	margin-left: 0px;
-	font-size: 12px;
-	background: white;
+	font-size: 14px;
+	font-family: sans-serif;
+	font-weight: 300;
 }
 
 .subscribe-essays-submit {
 	float: right;
+	margin-top: -20px;
 }
 .subscribe-essays-submit input {
 	margin: 0px;
@@ -2690,7 +2698,8 @@ li.recent-item a:hover {
 	padding-top: 60px; 
 	width: 750px; 
 	margin: 0 auto;
-	font-family: Georgia, serif !important;
+	font-family: sans-serif !important;
+	font-weight: 300;
 }
 
 .recently-published-header {
@@ -2758,11 +2767,14 @@ color: #222;
 font-weight: normal;
 }
 
+.subscribe-home-essay-topics { margin-top: 15px; }
+.subscribe-single-essay-topics { margin-top: 5px; }
+
 .subscribe-home-email {
 	position: relative; 
 	width:700px; 
 	height: 160px; 
-	margin-top: 30px; 
+	margin-top: 60px; 
 	background: url(http://raamdev.com/wordpress/wp-content/uploads/2011/12/subscribe-email-bg.gif) no-repeat;
 }
 .subscribe-home-kindle {
@@ -2876,24 +2888,25 @@ font-weight: normal;
 .post-footer-meta { font-size: 12px; }
 .post-footer-meta a { color: #222 !important; }
 .thought-entry .post-footer-meta { text-align: center; }
-.thought-entry p { font-size: 1.2em; margin-bottom: 1em; line-height: 1.3em; }
-
+/*.thought-entry p { font-size: 1.2em; margin-bottom: 1em; line-height: 1.3em; font-family: sans-serif; font-weight: 300;}*/
+.thought-entry p { font-size: 2em; margin-bottom: 1em; line-height: 1.2em; font-family: serif; color: #333; line-height: }
+ 
 #page-home { font-family: Georgia, serif !important; }
 
-.entry-content img {border: 1px solid #ddd; text-align: center; background-color: #fafafa; padding: 5px; margin: 5px 10px 10px 0px; -moz-border-radius: 3px; -khtml-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; max-width: 570px}
+.entry-content img {border: 1px solid #ddd; text-align: center; background-color: #fafafa; margin-bottom: 2em; padding: 5px; -moz-border-radius: 3px; -khtml-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; max-width: 97.5%; }
 
 #mentions { margin-bottom: 1em; font: 300 23px/26px sans-serif; }
 
 .related_post_title { margin-top: 2em; }
 .related_post { margin-left: 2em; line-height: 1.4em; margin-top: 1em; }
-.related_post a { font-size: 90% !important; }
+/*.related_post a { font-size: 90% !important; }*/
 
 .trackback, .pingback, .ping { margin-left: 2em; }
-.trackback { line-height: 1.8em !important; }
+/*.trackback { line-height: 1.8em !important; }*/
 
 .comment-edit-link { display: none; }
 
-.thoughts .entry-content { text-align: center !important; font-size: 1.5em !important; margin-top: 30px; }
+/*.thoughts .entry-content { text-align: center !important; font-size: 1.5em !important; }*/
 
 #journal-notice {
 	border: 1px solid #EDEDED;
@@ -2904,8 +2917,8 @@ font-weight: normal;
 	padding-bottom: 0px; 
 }
 
-.thought-archives { margin-top: 100px !important; }
 .thought-archives a { color: black !important; }
+.thought-archives p, .thoughts .entry-content p { font-family: serif; color: #333; font-size:2em; line-height: 1.2em; }
 
 #img { border: 1px solid #ddd; text-align: center; background-color: #fafafa; padding: 5px; margin: 5px 10px 10px 0px; -moz-border-radius: 3px; -khtml-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; max-width: 490px; }
 
@@ -2946,5 +2959,20 @@ font-weight: normal;
 
 #menu-main-nav { margin: 0px !important; width: 100% !important; }
 #menu-main-nav li { margin-top: 0px; margin-right: 5px !important; }
-.subscribe a { padding-right: 0px !important; }
+/* .subscribe a { padding-right: 0px !important; }*/
 .subscribe sup a { padding-left: 0px !important; }
+
+#cboxClose, #cboxTitle { font-size: 12px; }
+
+#audio-player img { border: none; background-color: inherit; padding: 0px; margin-bottom: 0em; max-width: inherit; border-radius: 0; }
+#audio-player a { border-bottom: none; font-style: italic; color: rgba(0, 0, 0, 0.3) !important; }
+#audio-player { margin-bottom: 0.5em; text-align: left; }
+
+.mc-field-group { font-family: sans-serif; font-weight: 300; margin-top: 5px; }
+
+.entry-header .mapThis a, .entry-content .mapThis a { color: rgba(0, 0, 0, 0.3) !important; border-bottom: none !important; }
+
+.journal .entry-title, .journal .entry-content h1 { text-align: left !important; }
+.post .entry-title, .post .entry-content h1 { text-align: left !important; }
+.thoughts .entry-meta { text-align: center !important; }
+.thought-archives { text-align: center; }
