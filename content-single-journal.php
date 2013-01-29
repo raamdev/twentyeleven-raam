@@ -24,8 +24,10 @@
 $release_after=365 * 86400; // days * seconds per day
 $post_age = date('U') - get_post_time('U');
 if ($post_age > $release_after || current_user_can("access_s2member_level1")) { ?>
-	
-<?php the_post_thumbnail('medium', array('class' => 'alignleft singlethumb')); ?>		
+
+<?php if ($post_age > $release_after && !current_user_can("access_s2member_level1")) { ?>
+<div style="font-size: 80%; border: 1px solid #eee; padding: 20px; margin-bottom: 20px; line-height: 1.4em; background: #eee;">This is an entry from my <a href="http://raamdev.com/about/journal/">personal Journal</a> and it was published over one year ago. It was initially only available to paying subscribers. However, as per my <a href="http://raamdev.com/income-ethics-series/#public_domain">Income Ethics</a>, "all non-free creative work will be made public domain within one year". So, after spending one year behind a paywall, this content is now free. Ah, sweet freedom!</div>
+<?php } ?>
 
 <?php the_content(); ?>
 		<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
