@@ -16,7 +16,7 @@ get_header(); ?>
 				</header>
 					<div id="header-line"></div>
 <div class="entry-content">
-	<div class="hentry archive-title"><h3>The Last 50 Essays</h3></div>
+	<div class="hentry archive-title"><h3>50 Most Recent Essays</h3></div>
 				<ul>
 					<?php query_posts('showposts=50&cat=-547'); ?>
 	              <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
@@ -38,6 +38,14 @@ get_header(); ?>
 				  <option value=""><?php echo attribute_escape(__('Select Month')); ?></option> 
 				  <?php wp_get_archives('type=monthly&format=option&show_post_count=0'); ?> </select>
 				</div>
+
+<div class="hentry archive-title"><h3>Tags</h3>
+<p style="font-size: 12px;"><em>(Hint: Click one of the categories above to see tags for only that category.)</em></p>
+<?php if ( function_exists('wp_tag_cloud') ) : ?>
+<?php wp_tag_cloud('smallest=8&largest=22'); ?>
+<?php endif; ?>
+</div>
+
 </div> <!-- entry-content -->
 								
 				<?php// the_post(); ?>
