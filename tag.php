@@ -24,7 +24,7 @@ get_header(); ?>
 						if ( ! empty( $tag_description ) )
 							echo apply_filters( 'tag_archive_meta', '<div class="tag-archive-meta">' . $tag_description . '</div>' );
 					?>
-				</header>
+				</header><br/>
 
 				<?php twentyeleven_content_nav( 'nav-above' ); ?>
 
@@ -61,5 +61,4 @@ get_header(); ?>
 			</div><!-- #content -->
 		</section><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

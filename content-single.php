@@ -19,7 +19,6 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-<?php the_post_thumbnail('medium', array('class' => 'alignleft singlethumb')); ?>		
 
 <?php the_content(); ?>
 		<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>

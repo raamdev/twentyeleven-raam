@@ -21,8 +21,6 @@
 
 <?php essays_post_header_metadata(); ?>
 
-<div style="border-top: 1px solid #EEE; width: 100px; margin: 0 auto;"></div>
-
 		<?php wp_link_pages( array( 'before' => '<div class="page-link"><span>' . __( 'Pages:', 'twentyeleven' ) . '</span>', 'after' => '</div>' ) ); ?>
 	</div><!-- .entry-content -->
 
