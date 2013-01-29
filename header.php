@@ -22,7 +22,8 @@
 <html <?php language_attributes(); ?>>
 <!--<![endif]-->
 <head>
-<link href='http://fonts.googleapis.com/css?family=Habibi:400italic,400,700' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Habibi:400italic,400,700' rel='stylesheet' type='text/css'> -->
+<!-- <link href='https://fonts.googleapis.com/css?family=Habibi:400italic,400,700' rel='stylesheet' type='text/css'> -->
 
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
@@ -70,6 +71,10 @@
 <!-- Google Plus One Button -->
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 <!-- Google Plus One Button -->
+
+<!-- Tooltips JavaScript for Resources Page -->
+<script type="text/javascript" language="javascript" src="<?php bloginfo('template_directory'); ?>/tooltips/tooltips.js"></script>
+<!-- Tooltips JavaScript for Resources Page -->
 </head>
 
 <body <?php body_class(); ?>>
