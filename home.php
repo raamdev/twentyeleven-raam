@@ -9,10 +9,10 @@
 get_header(); ?>
 </div> <!-- end #main div since we don't use it on the home page -->
 
-<!-- START FLICKR PHP CODE; see http://pastie.org/4277961 -->
+<!-- START FLICKR PHP CODE; see https://gist.github.com/3844131 -->
 <?php
 
-$flickr_api_key = '57c5be5c1e4e2cd769283802858aa18a'; // Your own API key (get one here: http://www.flickr.com/services/apps/create/apply/)
+$flickr_api_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Your own API key (get one here: http://www.flickr.com/services/apps/create/apply/)
 $flickr_user_id = '89743353@N00'; // Your numeric user ID.
 $flickr_album_id = '72157626450096422'; // ID of the photoset
 
@@ -59,7 +59,7 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 <!-- START OPENING SECTION -->
 <div style="margin: 0 auto; width: 35em;">
 
-	<div style="margin-top: 15px; text-align: center; font-size: 12px;"><em>I'm a <a href="#recently-published">writer</a>, <a href="/running-activity/">runner</a>, and <a href="/travels/#map">nomadic explorer</a>, last seen <?php echo do_shortcode("[ncl-current-location display='date']"); ?> ago in <?php echo do_shortcode("[ncl-current-location wikify='true']"); ?>.</em></div>
+	<div style="margin-top: 15px; text-align: center; font-size: 13px; font-family: sans-serif; font-weight: 300;">I'm a <a style="border-bottom: 1px dotted #333;" href="#recently-published">writer</a> and I was last seen <?php echo do_shortcode("[ncl-current-location display='date']"); ?> ago in <span class="mapThis" place="<?php echo do_shortcode("[ncl-current-location wikify='false']"); ?>" zoom="2"><?php echo do_shortcode("[ncl-current-location wikify='false']"); ?></span>.</div>
 
 <div style="padding-top: 30px; text-align: center;">	 <!-- MODIFIED -->
 	
@@ -74,7 +74,7 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 <!-- <a style="border-bottom: 0px;" href="/about/"><img title="Greeting the sunrise from Australia for the first time" border="0" src="http://raamdev.com/wordpress/wp-content/uploads/2012/05/2012-05-12-Raam-Austraila.jpg"></a> -->
 <!-- <a style="border-bottom: 0px;" href="/about/"><img title="Contemplating Life underneath a tree in Australia" border="0" src="http://raamdev.com/wordpress/wp-content/uploads/2012/05/2012-05-20-under-tree-contemplating.jpg"></a> -->
 <!-- LOAD RANDOM FLICKR PHOTO; see http://pastie.org/4277961 --> 
-<a rel="lightbox[featuredPhoto]" class="cboxModal" style="border-bottom: 0px;" href="<?php echo $flickr_img_url_large; ?>" title="<?php echo $flickr_photo_description; ?>"><img style="max-height: 400px;" title="<?php echo $flickr_photo_description; ?>" border="0" src="<?php echo $flickr_img_url; ?>"></a> 
+<a rel="lightbox[featuredPhoto]" class="cboxModal" style="border-bottom: 0px;" href="<?php echo $flickr_img_url_large; ?>" title="<?php echo $flickr_photo_description; ?>"><img style="max-height: 400px;" title="<?php echo $flickr_photo_description; ?>" border="0" src="<?php echo $flickr_img_url; ?>"></a>
 <!-- END LOAD RANDOM FLICKR PHOTO -->
 
 </div>
@@ -115,8 +115,10 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 	<div class="recently-published-header"></div>
 	<div class="recently-published-box-left">
 		<h3 class="recently-published-essays"></h3>
+
+<h3 style="font-size:95%; margin-left: 45px;">Personal Reflections</h3>
 		<ul>
-			<?php query_posts($query_string . '&post_type=post&posts_per_page=5'); ?>
+			<?php query_posts($query_string . '&post_type=post&posts_per_page=5&cat=20'); ?>
 
 			<?php if (have_posts()) : ?>
 
@@ -129,12 +131,47 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 			<?php endif; ?>
 			
 		</ul>
-		<div class="recently-published-more"><a href="/archives/">more →</a></div>
+		<div class="recently-published-more"><a href="/category/personal-reflections/">More Personal Reflections →</a></div>
+
+<h3 style="font-size:95%; margin-left: 45px;">Writing and Publishing</h3>
+		<ul>
+			<?php query_posts($query_string . '&post_type=post&posts_per_page=5&cat=859'); ?>
+
+			<?php if (have_posts()) : ?>
+
+				<?php while (have_posts()) : the_post(); ?>
+					
+		<li class="recent-item"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">&#187; &nbsp; <?php echo mb_strimwidth(get_the_title(), 0, 46, '...'); ?></a></li>
+		
+				<?php endwhile; ?>
+				
+			<?php endif; ?>
+			
+		</ul>
+		<div class="recently-published-more"><a href="/category/writing/">More essays on Writing and Publishing →</a></div>
+
+<h3 style="font-size:95%; margin-left: 45px;">Technology and Futurism</h3>
+		<ul>
+			<?php query_posts($query_string . '&post_type=post&posts_per_page=5&cat=5'); ?>
+
+			<?php if (have_posts()) : ?>
+
+				<?php while (have_posts()) : the_post(); ?>
+					
+		<li class="recent-item"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">&#187; &nbsp; <?php echo mb_strimwidth(get_the_title(), 0, 43, '...'); ?></a></li>
+		
+				<?php endwhile; ?>
+				
+			<?php endif; ?>
+			
+		</ul>
+		<div class="recently-published-more"><a href="/category/technology/">More essays on Technology and Futurism →</a></div>
+
 	</div>
 	<div class="recently-published-box-right">
 		<h3 class="recently-published-thoughts"></h3>
 		<ul>
-				<?php query_posts($query_string . '&post_type=thoughts&posts_per_page=5'); ?>
+				<?php query_posts($query_string . '&post_type=thoughts&posts_per_page=10'); ?>
 
 				<?php if (have_posts()) : ?>
 
@@ -146,44 +183,28 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 
 				<?php endif; ?>
 		</ul>
-		<div class="recently-published-more"><a href="/thoughts/">more →</a></div>
+		<div class="recently-published-more"><a href="/thoughts/">More Thoughts →</a></div>
+	</div>
+
+	<div class="recently-published-box-right">
+
+	<h3 class="recently-published-journals"></h3>
+		<ul>
+				<?php query_posts($query_string . '&post_type=journal&posts_per_page=9'); ?>
+
+				<?php if (have_posts()) : ?>
+
+					<?php while (have_posts()) : the_post(); ?>
+
+			<li class="recent-item"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">&#187; &nbsp; <?php echo mb_strimwidth(get_the_title(), 0, 46, '...'); ?></a></li>
+
+					<?php endwhile; ?>
+
+				<?php endif; ?>
+		</ul>
+		<div class="recently-published-more"><a href="/journal/">More Journals →</a></div>
 	</div>
 	<div style="clear: both;"> </div>
-	
-	<div class="recently-published-box-left">
-		<h3 class="recently-published-journals"></h3>
-		<ul>
-				<?php query_posts($query_string . '&post_type=journal&posts_per_page=5'); ?>
-
-				<?php if (have_posts()) : ?>
-
-					<?php while (have_posts()) : the_post(); ?>
-
-			<li class="recent-item"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">&#187; &nbsp; <?php echo mb_strimwidth(get_the_title(), 0, 46, '...'); ?></a></li>
-
-					<?php endwhile; ?>
-
-				<?php endif; ?>
-		</ul>
-		<div class="recently-published-more"><a href="/journal/">more →</a></div>
-	</div>
-	<div class="recently-published-box-right">
-		<h3 class="recently-published-notes"></h3>
-		<ul>
-				<?php query_posts($query_string . '&post_type=notes&posts_per_page=5'); ?>
-
-				<?php if (have_posts()) : ?>
-
-					<?php while (have_posts()) : the_post(); ?>
-
-			<li class="recent-item"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">&#187; &nbsp; <?php echo mb_strimwidth(get_the_title(), 0, 46, '...'); ?></a></li>
-
-					<?php endwhile; ?>
-
-				<?php endif; ?>
-		</ul>
-		<div class="recently-published-more"><a href="/notes/">more →</a></div>
-	</div>
 	
 </div>
 
@@ -209,7 +230,7 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 			<div class="subscribe-essays-email">Email: <input type="text" class="text" name="EMAIL" value="" tabindex="501" onclick="" onfocus=""></div>
 			
 			<div style="display:none;"> <input type="hidden" name="MERGE3" value="<?php echo 'http://' . $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; ?>" id="MERGE3"> </div>
-			
+			<div style="display:none;"> <input type="hidden" name="group[1873]" value="32" id="group[1873]"> </div>
 <div style="clear:both"></div>
 <div class="mc-field-group">
 	<label for="mce-group[1129]">How often would you like to receive new updates? </label>
@@ -217,8 +238,13 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 	<option value="1" selected="selected">Immediately</option>
 <option value="2">Weekly</option>
 <option value="4">Monthly</option>
-
 	</select>
+<div class="subscribe-home-essay-topics">
+Essay topics:
+<input type="checkbox" id="group_64" name="group[1989][64]" value="1" checked="yes">&nbsp;<label for="group_64" style="font-style: italic;">Personal Reflections</label>
+<input type="checkbox" id="group_128" name="group[1989][128]" value="1" checked="yes">&nbsp;<label for="group_128" style="font-style: italic;">Technology</label>
+<input type="checkbox" id="group_256" name="group[1989][256]" value="1" checked="yes">&nbsp;<label for="group_256" style="font-style: italic;">Writing</label><br>
+</div>
 	<div class="subscribe-essays-submit"><input type="submit" name="subscribe" value="Subscribe" tabindex="503"></div>
 </div>
 
@@ -235,12 +261,17 @@ if ('' == $flickr_photo_description) { $flickr_photo_description = $flickr_photo
 
 		<div class="subscribe-home-journal" onclick="window.location='http://raamdev.com/about/journal/';">
 			
-			<div class="subscribe-home-journal-text"><a href="/about/journal/">Subscribe to Journals and Notes &rarr;</a>
-<div style="line-height: 23px; font-size: 14px; margin-top: 20px;">
+			<div class="subscribe-home-journal-text"><a href="/about/journal/">Subscribe to my Personal Journal &rarr;</a>
+<div style="line-height: 23px; font-size: 14px; margin-top: 20px; font-family: sans-serif; font-weight: 300;">
 Discover what inspires my Thoughts and Essays. <br />
-Subscribe for $7/month; <a href="http://raamdev.com/about/journal/" style="color: #326281">learn more →</a>
+Subscribe for $40/year; <a href="http://raamdev.com/about/journal/" style="color: #326281">learn more →</a>
 </div></div>
 		</div>
+<div id="rss" style="
+    margin-top: 50px;
+    font-size: 14px;
+    text-align: center;
+"><strong>RSS Feeds:</strong> <a href="http://feeds.feedburner.com/RaamDevsWeblog">Personal Reflections RSS</a> | <a href="http://feeds.feedburner.com/RaamDevWriting">Writing &amp; Publishing RSS</a> | <a href="http://feeds.feedburner.com/RaamDevTechnology">Technology RSS</a></div>
 </div>
 
 <div style="clear:both;"></div> 
@@ -260,6 +291,7 @@ Subscribe for $7/month; <a href="http://raamdev.com/about/journal/" style="color
 		</div>
 		<div class="say-hello-email"><a href="http://raamdev.com/contact/"><img src="http://raamdev.com/wordpress/wp-content/uploads/2011/12/email.gif" border="0" class="say-hello-email-img"></img></a> 
 		</div>
+
 </div>
 
 <div style="clear: both;"> </div>
